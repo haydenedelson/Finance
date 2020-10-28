@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <h1>Current Portfolio</h1>
+    <table class="table table-striped">
+        <thead>
+            <th scope="col">Symbol</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Current Price</th>
+            <th scope="col">TOTAL</th>
+        </thead>
+        <tbody>
+            {% for holding in holdings %}
+                {% if holding["symbol"] != "total_portfolio_value" %}
+                    <tr>
+                        <td>{{ holding["symbol"] }}</td>
+                        <td>{{ holding["name"] }}</td>
+                        <td>{{ holding["quantity"] }}</td>
+                        <td>{{ holding["price"] }}</td>
+                        <td>{{ holding["total_value"] }}</td>
+                    </tr>
+                {% else %}
+                    <thead class>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">{{ holding["total_value"] }}</th>
+                    </thead>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
